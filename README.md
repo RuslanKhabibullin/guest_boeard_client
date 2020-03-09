@@ -1,7 +1,8 @@
 My attempt to realize GuestBoard chat application (with create-react-app). Stack:
-- Pusher (as Sockets)
+- Pusher (as Socket)
 - React
 - Redux
+- Material UI
 
 - GuestBoard backend git repository: https://github.com/RuslanKhabibullin/guest_board_api
 
