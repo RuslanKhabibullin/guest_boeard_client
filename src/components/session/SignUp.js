@@ -19,8 +19,5 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default unauthorizedOnly(
-  connect(
-    null,
-    mapDispatchToProps
-  )(SignUp)
+  connect(null, mapDispatchToProps)(SignUp)
 )
