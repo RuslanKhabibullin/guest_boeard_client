@@ -2,7 +2,8 @@ import { Record } from "immutable"
 import {
   USER_SIGN_OUT,
   USER_SIGN_IN,
-  USER_SIGN_UP
+  USER_SIGN_UP,
+  GOOGLE
 } from "../constants"
 
 const userId = window.localStorage.getItem("userId")
@@ -29,6 +30,14 @@ const defaultState = new ReducerState()
 export default (state = defaultState, action) => {
   const { type, payload } = action
   switch (type) {
+    case USER_SIGN_IN + GOOGLE:
+      const { token } = payload
+      window.localStorage.setItem("userId", 1)
+      window.localStorage.setItem("token", token)
+      return state
+        .set("authentication", new AuthRecord({ token: token, loaded: true }))
+        .set("record", new UserRecord({ id: 1, email: 'user@email.com', loaded: true }))
+        .set("error", {})
     case USER_SIGN_IN:
     case USER_SIGN_UP:
       window.localStorage.setItem("userId", 1)

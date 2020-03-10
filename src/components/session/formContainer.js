@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import { emailValidate, passwordValidate } from '../../validations'
+import GoogleAuthButton from './GoogleAuthButton'
 
 const validate = ({ email, password }) => {
   const errors = {}
@@ -48,7 +49,7 @@ export default (type, onSubmit) => () => {
       margin: theme.spacing(3, 0, 2)
     },
     links: {
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(2),
       display: "flex",
       justifyContent: "flex-end"
     },
@@ -110,6 +111,7 @@ export default (type, onSubmit) => () => {
           >
             {title}
           </Button>
+          <GoogleAuthButton />
           <div className={styles.links}>
             {linkBlock(type)}
           </div>
