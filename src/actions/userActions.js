@@ -5,10 +5,10 @@ import {
   GOOGLE
 } from '../constants'
 
-export function signUp({ email, password }) {
+export function signUp(payload) {
   return {
     type: USER_SIGN_UP,
-    payload: { email, password }
+    payload: payload
   }
 }
 
