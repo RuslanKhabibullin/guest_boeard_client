@@ -6,7 +6,8 @@ import {
   GOOGLE,
   SUCCESS,
   START,
-  FAIL
+  FAIL,
+  USER_FETCH
 } from "../constants"
 
 const token = window.localStorage.getItem("token")
@@ -44,10 +45,9 @@ export default (state = defaultState, action) => {
     case USER_SIGN_IN + GOOGLE + FAIL:
     case USER_SIGN_IN + FAIL:
     case USER_SIGN_UP + FAIL:
-      const { error } = payload
       return state
         .set("authentication", new AuthRecord({ loaded: false }))
-        .set("error", error)
+        .set("error", payload.error)
     case USER_SIGN_IN + GOOGLE + SUCCESS:
     case USER_SIGN_IN + SUCCESS:
     case USER_SIGN_UP + SUCCESS:
@@ -62,6 +62,26 @@ export default (state = defaultState, action) => {
       return state
         .set("authentication", new AuthRecord({ token: undefined, loaded: false }))
         .set("record", new UserRecord({}))
+        .set("error", {})
+    case USER_FETCH + START:
+      return state
+        .set("record", new UserRecord({ loaded: false, loading: true }))
+        .set("error", {})
+    case USER_FETCH + FAIL:
+      return state
+        .set("record", new UserRecord({ loaded: false, loading: false }))
+        .set("error", payload.error)
+    case USER_FETCH + SUCCESS:
+      const { id, email, first_name, last_name } = payload.entity
+      return state
+        .set("record", new UserRecord({
+          loaded: true,
+          loading: false,
+          firstName: first_name,
+          lastName: last_name,
+          id,
+          email
+        }))
         .set("error", {})
     default:
       return state

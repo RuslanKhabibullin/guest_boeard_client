@@ -1,9 +1,8 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import { googleSignIn } from '../services/googleApi'
 import { connect } from 'react-redux'
-import { googleSignIn as googleSignInAC } from '../../actions/userActions'
+import { googleSignIn } from '../../actions/userActions'
 import PropTypes from 'prop-types'
 
 const useStyles = makeStyles(theme => ({
@@ -23,21 +22,15 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const GoogleAuthButton = ({ googleSignInAC }) => {
+const GoogleAuthButton = ({ googleSignIn }) => {
   const { googleButton, googleIcon } = useStyles()
-  const clickHandler = () => {
-    googleSignIn().then(googleUser => {
-      const idToken = googleUser.getAuthResponse().id_token
-      googleSignInAC(idToken) 
-    })
-  }
 
   return (
     <Button
       fullWidth
       className={googleButton}
       variant="contained"
-      onClick={clickHandler}
+      onClick={googleSignIn}
     >
       <img alt="google icon" src="/g-logo.png" className={googleIcon} />
       Sign in with Google
@@ -46,11 +39,11 @@ const GoogleAuthButton = ({ googleSignInAC }) => {
 }
 
 GoogleAuthButton.propTypes = {
-  googleSignInAC: PropTypes.func.isRequired
+  googleSignIn: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = dispatch => {
-  return { googleSignInAC: token => dispatch(googleSignInAC(token)) }
+  return { googleSignIn: () => dispatch(googleSignIn()) }
 }
 
 export default connect(null, mapDispatchToProps)(GoogleAuthButton)

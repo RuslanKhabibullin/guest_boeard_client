@@ -1,18 +1,5 @@
 import { BASE_URL } from '../constants'
-
-const requestData = (body = {}, method = 'GET', token = null) => {
-  let headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
-
-  return {
-    method,
-    body,
-    mode: 'cors',
-    headers: token ? { ...headers, Authorization: `Bearer ${token}` } : headers
-  }
-}
+import { requestData } from './base'
 
 export const signInRequest = ({ email, password }) => {
   return fetch(`${BASE_URL}/sign_in`, requestData(
@@ -26,4 +13,15 @@ export const signUpRequest = ({ email, password, firstName, lastName }) => {
     JSON.stringify({ user: { email, password, first_name: firstName, last_name: lastName }}),
     'POST'
   ))
+}
+
+export const googleSignInRequest = ({ token, provider }) => {
+  return fetch(`${BASE_URL}/sign_in/oauth`, requestData(
+    JSON.stringify({ token, provider }),
+    'POST'
+  ))
+}
+
+export const fetchProfileRequest = (token) => {
+  return fetch(`${BASE_URL}/users/me`, requestData({}, 'GET', token))
 }
