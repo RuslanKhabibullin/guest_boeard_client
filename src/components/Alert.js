@@ -22,7 +22,11 @@ class Alert extends Component {
 
   decoratedErrorMessage = ({ error }) => {
     return Object.entries(error).reduce((stringErrors, [name, errors]) => {
-      return name === 'base' ? [...stringErrors, errors] : [...stringErrors, `${name} ${errors.join(",")}`]
+      if (name === 'base') return [...stringErrors, errors]
+      
+      return Object.entries(errors).reduce((nested_errors, [nestedName, nestedErrors]) => {
+        return [...nested_errors, `${name} ${nestedName} ${nestedErrors.join(",")}`]
+      }, [])
     }, []).join(",")
   }
 

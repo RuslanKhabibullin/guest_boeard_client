@@ -8,13 +8,23 @@ import {
   SUCCESS
 } from '../constants'
 import {
-  signInRequest
+  signInRequest,
+  signUpRequest
 } from '../requests/user'
 
 export function signUp(payload) {
-  return {
-    type: USER_SIGN_UP,
-    payload: payload
+  return dispatch => {
+    dispatch({ type: USER_SIGN_UP + START })
+
+    signUpRequest(payload)
+      .then(response => {
+        if (response.ok) {
+          response.json().then(json => dispatch({ type: USER_SIGN_UP + SUCCESS, payload: json }))
+        } else {
+          response.json().then(json => dispatch({ type: USER_SIGN_UP + FAIL, payload: json }))
+        }
+      })
+      .catch(error => dispatch({ type: USER_SIGN_UP + FAIL, payload: error }))
   }
 }
 
