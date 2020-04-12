@@ -9,8 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import { validate } from '../../validations'
 import GoogleAuthButton from './GoogleAuthButton'
+import Loader from '../Loader'
 
-const SignIn = ({ signIn }) => {
+const SignIn = ({ signIn, authLoading }) => {
   const styles = makeStyles(theme => ({
     paper: {
       marginTop: theme.spacing(10),
@@ -45,6 +46,7 @@ const SignIn = ({ signIn }) => {
   return (
     <Container component="main" maxWidth="xs">
       <div className={styles.paper}>
+        { authLoading && <Loader /> }
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -99,7 +101,12 @@ const SignIn = ({ signIn }) => {
 }
 
 SignIn.propTypes = {
-  signIn: PropTypes.func.isRequired
+  signIn: PropTypes.func.isRequired,
+  authLoading: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = ({ user }) => {
+  return { authLoading: user.authentication.loading }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -107,5 +114,5 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default unauthorizedOnly(
-  connect(null, mapDispatchToProps)(SignIn)
+  connect(mapStateToProps, mapDispatchToProps)(SignIn)
 )
