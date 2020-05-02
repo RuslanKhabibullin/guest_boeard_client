@@ -1,24 +1,48 @@
-import React from 'react'
+import React, { Component } from 'react'
 import authorizedOnly from '../decorators/authorizedOnly'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import UserList from './UserList'
+import Pusher from 'pusher-js'
+import { CHANNEL_NAME, BASE_URL } from '../constants'
+import Loader from './Loader'
 
-const Dashboard = ({ user }) => {
-  const { firstName, lastName, email } = user
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Hello, {firstName} {lastName} ({email})</p>
-    </div>
-  )
-}
+class Dashboard extends Component {
+  static propTypes = {
+    token: PropTypes.string.isRequired
+  }
 
-Dashboard.propTypes = {
-  user: PropTypes.object.isRequired
+  state = {
+    channel: null
+  }
+
+  componentDidMount() {
+    const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
+      authEndpoint: BASE_URL + '/pusher/authenticate',
+      cluster: 'ap2',
+      auth: {
+        headers: { Authorization: `Bearer ${this.props.token}` }
+      }
+    })
+
+    this.setState({ channel: pusher.subscribe(CHANNEL_NAME) })
+  }
+
+  componentWillUnmount() {
+    const pusher = this.state.channel.pusher
+    pusher.unsubscribe(CHANNEL_NAME)
+  }
+
+  render() {
+    const { channel } = this.state
+    if (!channel) return <Loader />
+
+    return <UserList channel={channel} />
+  }
 }
 
 const mapStateToProps = ({ user }) => {
-  return { user: user.record }
+  return { token: user.authentication.token }
 }
 
 export default authorizedOnly(connect(mapStateToProps)(Dashboard))
