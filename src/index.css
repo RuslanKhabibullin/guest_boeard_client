@@ -3,3 +3,7 @@ body {
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
   font-display: swap;
 }
+
+.card {
+  background-color: #fff;
+}

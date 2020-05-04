@@ -1,0 +1,16 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.dashboard {
+  padding: 15px;
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.dashboard__card {
+  width: 250px;
+}

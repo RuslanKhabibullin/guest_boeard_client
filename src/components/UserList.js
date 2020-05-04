@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
+import ProfileIcon from './icons/ProfileIcon'
 
 class UserList extends Component {
   static propTypes = {
-    channel: PropTypes.object.isRequired
+    channel: PropTypes.object.isRequired,
+    className: PropTypes.string
   }
 
   state = {
@@ -32,18 +35,23 @@ class UserList extends Component {
   viewUserList = (userList = this.state.userList) => {
     return Object.entries(userList).map(([memberId, memberInfo]) => {
       return (
-        <li key={memberId}>
-          {memberInfo.first_name} {memberInfo.last_name}
-        </li>
+        <ListItem key={memberId}>
+          <ListItemAvatar>
+            <ProfileIcon />
+          </ListItemAvatar>
+          <ListItemText primary={`${memberInfo.first_name} ${memberInfo.last_name}`} />
+        </ListItem>
       )
     })
   }
 
   render() {
+    const { className } = this.props
+
     return (
-      <ul>
-        {this.viewUserList()}
-      </ul>
+      <div className={`${className} card`}>
+        <List>{this.viewUserList()}</List>
+      </div>
     )
   }
 }

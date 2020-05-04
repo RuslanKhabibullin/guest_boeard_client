@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import authorizedOnly from '../decorators/authorizedOnly'
+import authorizedOnly from '../../decorators/authorizedOnly'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import UserList from './UserList'
+import UserList from '../UserList'
 import Pusher from 'pusher-js'
-import { CHANNEL_NAME, BASE_URL } from '../constants'
-import Loader from './Loader'
+import { CHANNEL_NAME, BASE_URL } from '../../constants'
+import Loader from '../Loader'
+import './styles.css'
 
 class Dashboard extends Component {
   static propTypes = {
@@ -37,7 +38,11 @@ class Dashboard extends Component {
     const { channel } = this.state
     if (!channel) return <Loader />
 
-    return <UserList channel={channel} />
+    return (
+      <div className="dashboard">
+        <UserList channel={channel} className="dashboard__card" />
+      </div>
+    )
   }
 }
 
