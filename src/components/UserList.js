@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
-import ProfileIcon from './icons/ProfileIcon'
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import { List, ListItem, ListItemAvatar, ListItemText } from "@material-ui/core"
+import ProfileIcon from "./icons/ProfileIcon"
 
 class UserList extends Component {
   static propTypes = {
-    channel: PropTypes.object.isRequired,
-    className: PropTypes.string
+    channel: PropTypes.object.isRequired
   }
 
   state = {
@@ -16,16 +15,16 @@ class UserList extends Component {
   componentDidMount() {
     const { channel } = this.props
 
-    channel.bind('pusher:subscription_succeeded', members => {
+    channel.bind("pusher:subscription_succeeded", members => {
       let memberEntities = {}
       members.each(member => memberEntities[member.id] = member.info)
       this.setState({ userList: memberEntities })
     })
-    channel.bind('pusher:member_added', member => {
+    channel.bind("pusher:member_added", member => {
       const { userList } = this.state
       this.setState({ userList: { ...userList, [member.id]: member.info }})
     })
-    channel.bind('pusher:member_removed', member => {
+    channel.bind("pusher:member_removed", member => {
       const { userList } = this.state
       delete userList[member.id]
       this.setState({ userList: userList })
@@ -46,10 +45,8 @@ class UserList extends Component {
   }
 
   render() {
-    const { className } = this.props
-
     return (
-      <div className={`${className} card`}>
+      <div className="users">
         <List>{this.viewUserList()}</List>
       </div>
     )

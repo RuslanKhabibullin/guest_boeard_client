@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react"
 import PropTypes from "prop-types"
 import { signIn } from "../../actions/userActions"
 import { connect } from "react-redux"
-import unauthorizedOnly from '../../decorators/unauthorizedOnly'
-import { Container, Typography, TextField, Button, Link } from '@material-ui/core'
-import { Link as RouterLink } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import { useFormik } from 'formik';
-import { validate } from '../../validations'
-import GoogleAuthButton from './GoogleAuthButton'
-import Loader from '../Loader'
+import unauthorizedOnly from "../../decorators/unauthorizedOnly"
+import { Container, Typography, TextField, Button, Link } from "@material-ui/core"
+import { Link as RouterLink } from "react-router-dom"
+import { makeStyles } from "@material-ui/core/styles";
+import { useFormik } from "formik";
+import { validate } from "../../validations"
+import GoogleAuthButton from "./GoogleAuthButton"
+import Loader from "../Loader"
 
 const SignIn = ({ signIn, authLoading }) => {
   const styles = makeStyles(theme => ({
@@ -91,7 +91,7 @@ const SignIn = ({ signIn, authLoading }) => {
           <GoogleAuthButton />
           <div className={styles.links}>
             <Link component={RouterLink} to="/signup" variant="body2">
-              Don't have an account? Sign Up
+              Don"t have an account? Sign Up
             </Link>
           </div>
         </form>

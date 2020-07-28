@@ -7,4 +7,5 @@ export const START = "_START"
 export const SUCCESS = "_SUCCESS"
 export const FAIL = "_FAIL"
 export const USER_FETCH = "USER_FETCH"
+export const MESSAGES_FETCH = "MESSAGES_FETCH"
 export const CHANNEL_NAME = 'presence-chat'

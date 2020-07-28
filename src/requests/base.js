@@ -1,15 +1,15 @@
-export const requestData = (body = {}, method = 'GET', token = null) => {
+export const requestData = (body = {}, method = "GET", token = null) => {
   let headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
+    Accept: "application/json",
+    "Content-Type": "application/json"
   }
   let requestData = {
     method,
-    mode: 'cors',
+    mode: "cors",
     headers: token ? { ...headers, Authorization: `Bearer ${token}` } : headers
   }
 
-  return method === 'GET' ? requestData : { ...requestData, body } 
+  return method === "GET" ? requestData : { ...requestData, body } 
 }
 
 export const checkResponseForError = (response) => {

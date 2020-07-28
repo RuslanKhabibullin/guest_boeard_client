@@ -1,17 +1,17 @@
-import React from 'react'
-import { Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux'
-import { googleSignIn } from '../../actions/userActions'
-import PropTypes from 'prop-types'
+import React from "react"
+import { Button } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux"
+import { googleSignIn } from "../../actions/userActions"
+import PropTypes from "prop-types"
 
 const useStyles = makeStyles(theme => ({
   googleButton: {
     backgroundColor: "#4285F4",
     textTransform: "none",
     color: theme.palette.common.white,
-    '&:hover': {
-      backgroundColor: '#4285F4',
+    "&:hover": {
+      backgroundColor: "#4285F4",
       color: theme.palette.common.white
     }
   },

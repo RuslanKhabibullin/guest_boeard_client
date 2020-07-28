@@ -7,15 +7,15 @@ import {
   FAIL,
   SUCCESS,
   USER_FETCH
-} from '../constants'
+} from "../constants"
 import {
   signInRequest,
   signUpRequest,
   googleSignInRequest,
   fetchProfileRequest
-} from '../requests/user'
-import { checkResponseForError } from '../requests/base'
-import { googleSignIn as googleSignInApi } from '../services/googleApi'
+} from "../requests/user"
+import { checkResponseForError } from "../requests/base"
+import { googleSignIn as googleSignInApi } from "../services/googleApi"
 
 export function signUp(payload) {
   return dispatch => {
@@ -47,7 +47,7 @@ export function googleSignIn() {
       .then(googleUser => {
         const idToken = googleUser.getAuthResponse().id_token
 
-        googleSignInRequest({ token: idToken, provider: 'google' })
+        googleSignInRequest({ token: idToken, provider: "google" })
           .then(checkResponseForError)
           .then(data => dispatch({ type: USER_SIGN_IN + GOOGLE + SUCCESS, payload: data }))
           .catch(error => error.json().then(data => dispatch({ type: USER_SIGN_IN + GOOGLE + FAIL, payload: data })))

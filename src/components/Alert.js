@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Alert as MaterialAlert, AlertTitle } from '@material-ui/lab/'
-import { connect } from 'react-redux'
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import { Alert as MaterialAlert, AlertTitle } from "@material-ui/lab/"
+import { connect } from "react-redux"
 
 class Alert extends Component {
   state = {
@@ -22,7 +22,7 @@ class Alert extends Component {
 
   decoratedErrorMessage = ({ error }) => {
     return Object.entries(error).reduce((stringErrors, [name, errors]) => {
-      if (name === 'base') return [...stringErrors, errors]
+      if (name === "base") return [...stringErrors, errors]
       
       return Object.entries(errors).reduce((nested_errors, [nestedName, nestedErrors]) => {
         return [...nested_errors, `${name} ${nestedName} ${nestedErrors.join(",")}`]
@@ -39,7 +39,7 @@ class Alert extends Component {
     if (!message || hidden) return null
 
     return(
-      <MaterialAlert onClose={this.closeAlert} severity='error'>
+      <MaterialAlert onClose={this.closeAlert} severity="error">
         <AlertTitle>Error</AlertTitle>
         {message}
       </MaterialAlert>

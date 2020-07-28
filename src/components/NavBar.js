@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {
   AppBar,
   Toolbar,
@@ -6,13 +6,13 @@ import {
   List,
   ListItem,
   Tooltip
-} from '@material-ui/core'
-import { Link as RouterLink } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
+} from "@material-ui/core"
+import { Link as RouterLink } from "react-router-dom"
+import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux"
-import PropTypes from 'prop-types'
-import ProfileIcon from './icons/ProfileIcon'
-import LogoutIcon from './icons/LogoutIcon'
+import PropTypes from "prop-types"
+import ProfileIcon from "./icons/ProfileIcon"
+import LogoutIcon from "./icons/LogoutIcon"
 
 const useStyles = makeStyles(theme => ({
   navLink: {

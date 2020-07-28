@@ -11,6 +11,57 @@ body {
   align-items: stretch;
 }
 
-.dashboard__card {
+.users {
   width: 250px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.messages {
+  width: calc(100% - 260px);
+  height: calc(100vh - 250px);
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.messages__infinite-scroll {
+  height: calc(100% - 50px);
+  padding: 10px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.messages__card {
+  width: calc(100% - 10px);
+  min-height: 80px;
+  display: block;
+  box-sizing: border-box;
+  margin: 15px 0;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  display: flex;
+  flex-direction: row;
+}
+
+.messages__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.messages__photo {
+  margin: 0 20px 0 0;
+  padding: 0;
+  align-self: center;
+}
+
+.content--primary {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+}
+
+.content--secondary {
+  font-size: 14px;
 }

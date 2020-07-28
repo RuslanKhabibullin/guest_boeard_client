@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
 import { connect } from "react-redux"
-import Loader from '../components/Loader'
-import { fetchProfile } from '../actions/userActions'
+import Loader from "../components/Loader"
+import { fetchProfile } from "../actions/userActions"
 
 const authorizedOnly = (OriginalComponent) => class AuthorizedOnlyWrapper extends Component {
   componentDidMount() {

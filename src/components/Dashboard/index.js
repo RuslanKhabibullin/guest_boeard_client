@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
-import authorizedOnly from '../../decorators/authorizedOnly'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import UserList from '../UserList'
-import Pusher from 'pusher-js'
-import { CHANNEL_NAME, BASE_URL } from '../../constants'
-import Loader from '../Loader'
-import './styles.css'
+import React, { Component } from "react"
+import authorizedOnly from "../../decorators/authorizedOnly"
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
+import UserList from "../UserList"
+import MessageList from "../MessageList"
+import Pusher from "pusher-js"
+import { CHANNEL_NAME, BASE_URL } from "../../constants"
+import Loader from "../Loader"
+import "./styles.css"
 
 class Dashboard extends Component {
   static propTypes = {
@@ -19,8 +20,8 @@ class Dashboard extends Component {
 
   componentDidMount() {
     const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
-      authEndpoint: BASE_URL + '/pusher/authenticate',
-      cluster: 'ap2',
+      authEndpoint: BASE_URL + "/pusher/authenticate",
+      cluster: "ap2",
       auth: {
         headers: { Authorization: `Bearer ${this.props.token}` }
       }
@@ -40,7 +41,8 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboard">
-        <UserList channel={channel} className="dashboard__card" />
+        <UserList channel={channel} />
+        <MessageList channel={channel} />
       </div>
     )
   }
