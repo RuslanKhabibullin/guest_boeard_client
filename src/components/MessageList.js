@@ -20,6 +20,14 @@ class MessageList extends Component {
     messages: []
   }
 
+  componentDidMount() {
+    const { channel } = this.props
+
+    channel.bind("message_created", message => {
+      this.setState({ messages: [message, ...this.state.messages]})
+    })
+  }
+
   rememberMessagesResponseToState = (response) => {
     const { page } = this.state
     const { entities } = response
@@ -52,7 +60,7 @@ class MessageList extends Component {
 
   renderMessages = () => {
     const { messages } = this.state
-    return messages.map(message => <Message {...message} />)
+    return messages.map(message => <Message {...message} key={message.id} />)
   }
 
   renderWaypoint = () => {

@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import UserList from "../UserList"
 import MessageList from "../MessageList"
+import MessageInput from "../MessageInput"
 import Pusher from "pusher-js"
 import { CHANNEL_NAME, BASE_URL } from "../../constants"
 import Loader from "../Loader"
@@ -42,7 +43,10 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <UserList channel={channel} />
-        <MessageList channel={channel} />
+        <div className="dashboard__chat">
+          <MessageList channel={channel} />
+          <MessageInput />
+        </div>
       </div>
     )
   }
