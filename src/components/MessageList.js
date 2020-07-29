@@ -43,7 +43,7 @@ class MessageList extends Component {
         isLoaded: true,
         allLoaded: false,
         page: page + 1,
-        messages: entities
+        messages: this.state.messages.concat(entities)
       })
     }
   }
