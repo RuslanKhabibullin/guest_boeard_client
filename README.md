@@ -4,6 +4,7 @@ My attempt to realize GuestBoard chat application (with create-react-app). Stack
 - Redux
 - Material UI
 
+- Heroku: https://guest-board-client.herokuapp.com/
 - GuestBoard backend git repository: https://github.com/RuslanKhabibullin/guest_board_api
 
 ## Setup
